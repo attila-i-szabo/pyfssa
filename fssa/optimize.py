@@ -9,10 +9,20 @@
 from __future__ import absolute_import, division, print_function
 
 import numpy
-from numpy import asfarray
-from scipy.optimize.optimize import (OptimizeResult,
-                                     _status_message, wrap_function)
+from numpy import asarray as asfarray
+from scipy.optimize._optimize import OptimizeResult, _status_message
 
+# Copy-paste from scipy.optimize.optimize (v0.14)
+def wrap_function(function, args):
+    ncalls = [0]
+    if function is None:
+        return ncalls, None
+
+    def function_wrapper(*wrapper_args):
+        ncalls[0] += 1
+        return function(*(wrapper_args + args))
+
+    return ncalls, function_wrapper
 
 def _minimize_neldermead(func, x0, args=(), callback=None,
                          xtol=1e-4, ftol=1e-4, maxiter=None, maxfev=None,
