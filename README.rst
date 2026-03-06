@@ -55,3 +55,7 @@ transitions.
 
 * **Documentation**: http://pyfssa.readthedocs.org
 * **Setup**: http://pyfssa.readthedocs.org/en/stable/setup.html
+
+**This fork** has been adapted to work with Numpy 2, Scipy 1, and recent Python versions. It can be installed from the repo as::
+
+   pip install git+https://github.com/attila-i-szabo/pyfssa.git
